@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	ports, err := GetPortsBySerialID("usb-FTDI_FT231X_USB_UART")
+	ports, err := GetCompleteSerialID("usb-FTDI_FT231X_USB_UART")
 	if err != nil {
 		fmt.Println(err)
 	}
