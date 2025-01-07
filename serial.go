@@ -29,3 +29,15 @@ func GetPortsBySerialID(serialID string) ([]string, error) {
 
 	return ports, nil
 }
+
+func GetCompleteSerialID(serialID string) ([]string, error) {
+	cmd := fmt.Sprintf("ls -l /dev/serial/by-id/ | grep '%s' | awk '{print $9}'", serialID)
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		return []string{}, err
+	}
+	outStr := strings.TrimSpace(string(out))
+
+	ids := strings.Split(outStr, "\n")
+	return ids, nil
+}
